@@ -28,11 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.Manifest
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 
@@ -59,18 +61,19 @@ fun SignInPhone(
 
             Text(
                 text = "Sign In",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+            Row(
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = "Show us some Love Share our App")
+                Text(text = "Share our App ")
                 Text(
                     text = "Click here",
                     color = Color.Blue,
+                    style = TextStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic),
                     modifier = Modifier.clickable { onSwitchtoEmail() }
                 )
             }

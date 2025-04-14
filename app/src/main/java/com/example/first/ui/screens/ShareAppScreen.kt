@@ -5,9 +5,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +34,8 @@ fun SignInScreenEmail(navController:NavHostController){
                 .padding(horizontal = 20.dp, vertical = 60.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AppIcon(modifier = Modifier.paddingFromBaseline(top = 0.dp, bottom = 140.dp))
+            AppIcon(modifier = Modifier.align(Alignment.CenterHorizontally))
+            Spacer(modifier = Modifier.height(145.dp))
                 ShareApp(
                     onSwitchtoPhone = {
                         navController.navigate("SignInPhone")
