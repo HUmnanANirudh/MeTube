@@ -1,10 +1,7 @@
 package com.example.first.ui.components
 
-import android.Manifest
-import android.telephony.SmsManager
+import android.content.Intent
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,44 +27,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SignInEmail(
+fun ShareApp(
     onSwitchtoPhone: () -> Unit,
     onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
-    val smsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (!isGranted) {
-            Toast.makeText(context, "SMS permission denied", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    var phoneNumber by remember { mutableStateOf("") }
-    var otp by remember { mutableStateOf("") }
-    var isOtpSent by remember { mutableStateOf(false) }
-
+    var email by remember { mutableStateOf("") }
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
 
             Text(
-                text = "Sign In",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                text = "Show Us Some Love",
+                style = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.White)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Row {
-                Text(text = "Want to use Email? ")
+                Text(text = "Want to SignIn ? ", color = Color.White,)
                 Text(
                     text = "Click here",
-                    color = Color.Blue,
+                    color = Color.White,
+                    style = TextStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic),
                     modifier = Modifier.clickable { onSwitchtoPhone() }
                 )
             }
@@ -75,58 +63,41 @@ fun SignInEmail(
             Spacer(modifier = Modifier.height(16.dp))
 
             TextField(
-                value = phoneNumber,
-                onValueChange = { phoneNumber = it },
-                label = { Text("Enter Phone Number", textAlign = TextAlign.Center) },
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Enter Email", textAlign = TextAlign.Center) },
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 ),
                 shape = RoundedCornerShape(40.dp)
             )
-
             Spacer(modifier = Modifier.height(12.dp))
-
-            if (isOtpSent) {
-                TextField(
-                    value = otp,
-                    onValueChange = { otp = it },
-                    label = { Text("Enter OTP") },
-                    colors = TextFieldDefaults.colors(
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
-                    ),
-                    shape = RoundedCornerShape(40.dp)
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-            }
-
             Button(
                 onClick = {
-                    if (!isOtpSent) {
-                        smsLauncher.launch(Manifest.permission.SEND_SMS)
-                        val smsManager = SmsManager.getDefault()
-                        smsManager.sendTextMessage(
-                            phoneNumber, null,
-                            "Your OTP is 5195", null, null
-                        )
-
-                        Toast.makeText(context, "OTP sent to $phoneNumber", Toast.LENGTH_SHORT).show()
-                        isOtpSent = true
-                    } else {
-                        if (otp == "5195") {
-                            Toast.makeText(context, "OTP Verified!", Toast.LENGTH_SHORT).show()
-                            onSignIn()
-                        } else {
-                            Toast.makeText(context, "Incorrect OTP", Toast.LENGTH_SHORT).show()
+                    if(email.isNotEmpty()) {
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "message/rfc822"
+                            putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                            putExtra(Intent.EXTRA_SUBJECT, "You’ve got to check this out!")
+                            putExtra(
+                                Intent.EXTRA_TEXT,
+                                "Hey!\n\nMeTube is awesome!Super fun and easy to use.\n\nCheers!"
+                            )
                         }
+                        context.startActivity(Intent.createChooser(intent, "Send Email"))
+                        Toast.makeText(context,"Lots of Love",Toast.LENGTH_SHORT).show()
+                        onSignIn()
+                    }else{
+                        Toast.makeText(context,"Enter an email",Toast.LENGTH_SHORT).show()
                     }
-                }, colors = ButtonDefaults.buttonColors(
+                          }, colors = ButtonDefaults.buttonColors(
                     containerColor = Color(red = 191, green = 64, blue = 191, alpha = 255),
                     contentColor = Color.White),
-                contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+                contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
+
             ) {
-                Text(text = if (isOtpSent) "Sign In" else "Get OTP")
+                Text(text = "Share our mail")
             }
         }
     }

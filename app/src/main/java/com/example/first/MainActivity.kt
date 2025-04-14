@@ -9,6 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.first.ui.screens.Home
+import com.example.first.ui.screens.SignInScreenEmail
 import com.example.first.ui.screens.SignInScreenPhone
 
 val Purple = Color(red = 191, green = 64, blue = 191, alpha = 255)
@@ -27,6 +29,12 @@ class MainActivity : ComponentActivity() {
                 }
                 composable("SignInPhone") {
                     SignInScreenPhone(navController)
+                }
+                composable("SignInEmail") {
+                    SignInScreenEmail(navController)
+                }
+                composable("Home") {
+                    Home(navController)
                 }
             }
         }

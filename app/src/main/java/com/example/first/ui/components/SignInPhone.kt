@@ -7,7 +7,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -30,9 +29,11 @@ import androidx.compose.ui.unit.sp
 import android.Manifest
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
@@ -63,8 +64,10 @@ fun SignInPhone(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row {
-                Text(text = "Want to use Email? ")
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "Show us some Love Share our App")
                 Text(
                     text = "Click here",
                     color = Color.Blue,
@@ -82,7 +85,10 @@ fun SignInPhone(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 ),
-                shape = RoundedCornerShape(40.dp)
+                shape = RoundedCornerShape(40.dp),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number
+                )
             )
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -96,30 +102,38 @@ fun SignInPhone(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     ),
-                    shape = RoundedCornerShape(40.dp)
+                    shape = RoundedCornerShape(40.dp),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Number
+                    )
                 )
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
             Button(
                 onClick = {
-                    if (!isOtpSent) {
-                        smsLauncher.launch(Manifest.permission.SEND_SMS)
-                        val smsManager = SmsManager.getDefault()
-                        smsManager.sendTextMessage(
-                            phoneNumber, null,
-                            "Your OTP is 5195", null, null
-                        )
+                    if(phoneNumber.isNotEmpty() && phoneNumber.length == 10) {
+                        if (!isOtpSent) {
+                            smsLauncher.launch(Manifest.permission.SEND_SMS)
+                            val smsManager = SmsManager.getDefault()
+                            smsManager.sendTextMessage(
+                                phoneNumber, null,
+                                "Your OTP is 5195", null, null
+                            )
 
-                        Toast.makeText(context, "OTP sent to $phoneNumber", Toast.LENGTH_SHORT).show()
-                        isOtpSent = true
-                    } else {
-                        if (otp == "5195") {
-                            Toast.makeText(context, "OTP Verified!", Toast.LENGTH_SHORT).show()
-                            onSignIn()
+                            Toast.makeText(context, "OTP sent to $phoneNumber", Toast.LENGTH_SHORT)
+                                .show()
+                            isOtpSent = true
                         } else {
-                            Toast.makeText(context, "Incorrect OTP", Toast.LENGTH_SHORT).show()
+                            if (otp == "5195") {
+                                Toast.makeText(context, "OTP Verified!", Toast.LENGTH_SHORT).show()
+                                onSignIn()
+                            } else {
+                                Toast.makeText(context, "Incorrect OTP", Toast.LENGTH_SHORT).show()
+                            }
                         }
+                    }else{
+                        Toast.makeText(context,"Please enter a valid Phone number",Toast.LENGTH_SHORT).show()
                     }
                 }, colors = ButtonDefaults.buttonColors(
                     containerColor = Color(red = 191, green = 64, blue = 191, alpha = 255),
