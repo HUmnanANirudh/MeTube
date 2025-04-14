@@ -1,6 +1,5 @@
 package com.example.first.ui.screens
 
-import AppIcon
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.first.ui.components.AppIcon
 import com.example.first.ui.components.SignInPhone
 
 @Composable

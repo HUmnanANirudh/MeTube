@@ -1,8 +1,6 @@
 package com.example.first.ui.screens
 
-import AppIcon
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.first.R
+import com.example.first.ui.components.AppIcon
 import com.example.first.ui.components.ShareApp
 
 @Composable

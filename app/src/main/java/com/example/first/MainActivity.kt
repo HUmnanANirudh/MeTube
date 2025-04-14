@@ -1,6 +1,5 @@
 package com.example.first
 
-import WelcomeScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.first.ui.screens.Home
 import com.example.first.ui.screens.SignInScreenEmail
 import com.example.first.ui.screens.SignInScreenPhone
+import com.example.first.ui.screens.WelcomeScreen
 
 val Purple = Color(red = 191, green = 64, blue = 191, alpha = 255)
 

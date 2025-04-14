@@ -1,3 +1,5 @@
+package com.example.first.ui.screens
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.first.R
+import com.example.first.ui.components.AppIcon
 import com.example.first.ui.components.TextDescription
 
 @Composable

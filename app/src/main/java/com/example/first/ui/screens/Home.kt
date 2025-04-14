@@ -1,5 +1,6 @@
 package com.example.first.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +18,8 @@ fun Home (navController: NavHostController){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Hello World"
+            text = "Hello World",
+
         )
     }
 }

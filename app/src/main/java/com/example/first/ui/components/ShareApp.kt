@@ -1,6 +1,8 @@
 package com.example.first.ui.components
 
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -51,7 +53,7 @@ fun ShareApp(
             Spacer(modifier = Modifier.height(16.dp))
 
             Row {
-                Text(text = "Want to SignIn ? ", color = Color.White,)
+                Text(text = "Want to SignIn ? ", color = Color.White)
                 Text(
                     text = "Click here",
                     color = Color.White,
@@ -87,7 +89,9 @@ fun ShareApp(
                         }
                         context.startActivity(Intent.createChooser(intent, "Send Email"))
                         Toast.makeText(context,"Lots of Love",Toast.LENGTH_SHORT).show()
-                        onSignIn()
+                        runAfterDelay(3000){
+                            onSignIn()
+                        }
                     }else{
                         Toast.makeText(context,"Enter an email",Toast.LENGTH_SHORT).show()
                     }
@@ -101,4 +105,9 @@ fun ShareApp(
             }
         }
     }
+}
+fun runAfterDelay(delayMillis: Long, action: () -> Unit) {
+    Handler(Looper.getMainLooper()).postDelayed({
+        action()
+    }, delayMillis)
 }

@@ -40,7 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun SignInPhone(
-    onSwitchtoEmail: () -> Unit,
+    onSwitchToEmail: () -> Unit,
     onSignIn: () -> Unit
 ) {
     val context = LocalContext.current
@@ -74,7 +74,7 @@ fun SignInPhone(
                     text = "Click here",
                     color = Color.Blue,
                     style = TextStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic),
-                    modifier = Modifier.clickable { onSwitchtoEmail() }
+                    modifier = Modifier.clickable { onSwitchToEmail() }
                 )
             }
 
