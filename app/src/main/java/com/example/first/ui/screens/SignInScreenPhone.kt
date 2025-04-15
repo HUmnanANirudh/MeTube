@@ -31,7 +31,7 @@ fun SignInScreenPhone(navController:NavHostController){
                horizontalAlignment = Alignment.CenterHorizontally
            ) {
                SignInPhone(
-                   onSwitchtoEmail = {
+                   onSwitchToEmail = {
                        navController.navigate("SignInEmail")
                    },
                    onSignIn = {
