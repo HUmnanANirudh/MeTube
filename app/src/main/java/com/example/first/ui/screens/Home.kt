@@ -42,6 +42,7 @@ import android.Manifest
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.content.FileProvider
 import java.io.File
+
 @Composable
 fun Home() {
     val navItemsList = listOf(

@@ -210,11 +210,8 @@ fun showNotification(context: Context, fileName: String) {
             .build()
         notificationManager.createNotificationChannel(channel)
     }
-
-    // Runtime check for POST_NOTIFICATIONS permission (Android 13+)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // Do NOT try to request here — you can't from a non-Activity context
             Toast.makeText(context, "Notification permission not granted", Toast.LENGTH_SHORT).show()
             return
         }
